@@ -33,10 +33,10 @@ public class TaskResource {
         return taskDAO.create(task);
     }
 
-    @DELETE
-    @Path("completeTask/{taskId}")
+    @POST
+    @Path("completeTask")
     @UnitOfWork
-    public void completeTask(@PathParam("taskId") long taskId) {
-        taskDAO.delete(taskId);
+    public void completeTask(@Valid long[] taskIds) {
+        taskDAO.completeTasks(taskIds);
     }
 }

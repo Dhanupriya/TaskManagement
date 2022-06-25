@@ -4,6 +4,7 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.example.core.Task;
 import org.hibernate.SessionFactory;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskDAO extends AbstractDAO<Task> {
@@ -23,8 +24,10 @@ public class TaskDAO extends AbstractDAO<Task> {
         return list(namedTypedQuery("org.example.core.Task.findAll"));
     }
 
-    public void delete(long taskId){
-        Task task = findById(taskId);
-        currentSession().delete(task);
+    public void completeTasks(long[] taskIds) {
+        Arrays.stream(taskIds).forEach(id -> {
+            Task task = findById(id);
+            currentSession().delete(task);
+        });
     }
 }
