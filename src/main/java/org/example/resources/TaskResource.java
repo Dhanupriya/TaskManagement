@@ -36,7 +36,7 @@ public class TaskResource {
     @POST
     @Path("completeTask")
     @UnitOfWork
-    public void completeTask(@Valid long[] taskIds) {
+    public void completeTask(@Valid List<Long> taskIds) {
         taskDAO.completeTasks(taskIds);
     }
 }

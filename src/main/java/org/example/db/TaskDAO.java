@@ -24,8 +24,8 @@ public class TaskDAO extends AbstractDAO<Task> {
         return list(namedTypedQuery("org.example.core.Task.findAll"));
     }
 
-    public void completeTasks(long[] taskIds) {
-        Arrays.stream(taskIds).forEach(id -> {
+    public void completeTasks(List<Long> taskIds) {
+        taskIds.stream().forEach(id -> {
             Task task = findById(id);
             currentSession().delete(task);
         });
